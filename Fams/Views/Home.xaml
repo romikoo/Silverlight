@@ -1,0 +1,138 @@
+﻿<navigation:Page x:Class="Fams.Home" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+                                
+    xmlns:datagrid="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data"
+    xmlns:riacontrols="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Ria"
+    xmlns:riadata="clr-namespace:System.Windows.Data;assembly=System.Windows.Controls.Ria"
+    xmlns:ds="clr-namespace:Fams.Web.Services"
+    xmlns:myproject="clr-namespace:Fams"
+    xmlns:activity="clr-namespace:System.Windows.Controls;assembly=ActivityControl"
+                 
+                 
+                 
+    xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+	xmlns:telerik="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"
+	xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation"
+                 
+    mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480"
+    Title="Home"
+    Style="{StaticResource PageStyle}">
+
+
+    <Grid x:Name="LayoutRoot">
+
+        <!--Companies-->
+        <riacontrols:DomainDataSource x:Name="CompsData" AutoLoad="True" QueryName="GetFls_COMPANY_INFOs">
+            <riacontrols:DomainDataSource.DomainContext>
+                <ds:CompanyDomainContext />
+            </riacontrols:DomainDataSource.DomainContext>
+        </riacontrols:DomainDataSource>
+
+        <!--Licences-->
+        <riacontrols:DomainDataSource x:Name="LicsData" AutoLoad="False" QueryName="GetLicencesForCompany"
+                                      LoadedData="LicsData_LoadedData">
+            <riacontrols:DomainDataSource.QueryParameters>
+                <riacontrols:ControlParameter ControlName="CompaniesGrid"   
+                                              PropertyName="SelectedItem.id"
+                                              ParameterName="comp_id"/>
+            </riacontrols:DomainDataSource.QueryParameters>
+
+            <riacontrols:DomainDataSource.DomainContext>
+                <ds:LicenceDomainContext />
+            </riacontrols:DomainDataSource.DomainContext>
+        </riacontrols:DomainDataSource>
+
+        <!--Frequencies-->
+        <riacontrols:DomainDataSource x:Name="FreqsData" AutoLoad="False" QueryName="GetFrequenciesForLicence">
+            <riacontrols:DomainDataSource.QueryParameters>
+                <riacontrols:ControlParameter ControlName="LicencesGrid"   
+                                              PropertyName="SelectedItem.id"
+                                              ParameterName="licence_id"/>
+            </riacontrols:DomainDataSource.QueryParameters>
+
+            <riacontrols:DomainDataSource.DomainContext>
+                <ds:FreqDomainContext />
+            </riacontrols:DomainDataSource.DomainContext>
+        </riacontrols:DomainDataSource>
+
+
+        <ScrollViewer x:Name="PageScrollViewer" Style="{StaticResource PageScrollViewerStyle}">
+
+            <StackPanel x:Name="ContentStackPanel">
+
+                <TextBlock x:Name="HeaderText" Style="{StaticResource HeaderTextStyle}" 
+                                   Text="Home"/>
+                <TextBlock x:Name="ContentText" Style="{StaticResource ContentTextStyle}" 
+                                   Text="Home page content"/>
+
+                <TextBlock Text="{Binding SelectedItem.id, ElementName=CompaniesGrid}" />
+
+
+                <!--Tab Control-->
+                <StackPanel>
+                    <telerikNavigation:RadTabControl x:Name="Tabber" Height="650" TabStripPlacement="Bottom">
+
+                        <!--First Page-->
+                        <telerikNavigation:RadTabItem x:Name="CompPage" Header="ორგანიზაცია">
+                            <activity:Activity IsActive="{Binding IsBusy, ElementName=CompsData}">
+                                <StackPanel x:Name="CompsPanel" Margin="10,10,10,10"  >
+                                    <TextBlock Text="{Binding DataView.Count, ElementName=LicsData}" />
+
+                                    <datagrid:DataGrid x:Name="CompaniesGrid" 
+                                                   Width="1000" MinHeight="500"
+                                                   ItemsSource="{Binding Data, ElementName=CompsData}"
+                                                   SelectionChanged="CompaniesGrid_SelectionChanged">
+
+                                    </datagrid:DataGrid>
+                                    <datagrid:DataPager x:Name="CompaniesPager" PageSize="20" Margin="0,-1,0,0" Source="{Binding Data, ElementName=CompsData}" Width="{Binding Width, ElementName=CompaniesGrid}"/>
+                                </StackPanel>
+                            </activity:Activity>
+                        </telerikNavigation:RadTabItem>
+
+
+                        <!--Second Page-->
+                        <telerikNavigation:RadTabItem x:Name="LicPage" Header="ლიცენზია/სიხშირე">
+                            <activity:Activity IsActive="{Binding IsBusy, ElementName=FreqsData}">
+                                <StackPanel Margin="10,10,10,10" Orientation="Horizontal">
+                                    <datagrid:DataGrid x:Name="LicencesGrid" 
+                                                   Width="400" Height="500"  Margin="10,0,0,0" 
+                                                   ItemsSource="{Binding Data, ElementName=LicsData}"
+                                                   SelectionChanged="LicencesGrid_SelectionChanged">
+
+                                    </datagrid:DataGrid>
+
+                                    <datagrid:DataGrid x:Name="FrequenciesGrid" 
+                                                   Width="200" Height="500"  Margin="10,0,0,0" 
+                                                   ItemsSource="{Binding Data, ElementName=FreqsData}">
+                                    </datagrid:DataGrid>
+                                </StackPanel>
+                            </activity:Activity>
+                        </telerikNavigation:RadTabItem>
+
+                        
+                        <!--Third Page-->
+                        <telerikNavigation:RadTabItem x:Name="StationPage" Header="სადგურები">
+
+                            <StackPanel Margin="10,10,10,10" Orientation="Horizontal"></StackPanel>
+                            
+                        </telerikNavigation:RadTabItem>
+
+                    </telerikNavigation:RadTabControl>
+                </StackPanel>
+
+
+
+
+
+
+
+
+            </StackPanel>
+
+        </ScrollViewer>
+    </Grid>
+
+</navigation:Page>

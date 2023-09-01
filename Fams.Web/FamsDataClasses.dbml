@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="Fams" Class="FamsDataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=MCC-FLS\SQL2008;Initial Catalog=Fams;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="FamsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.fls_COMPANY_INFO" Member="fls_COMPANY_INFOs">
+    <Type Name="fls_COMPANY_INFO">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tax_id" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Comp_Account" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Comp_Name" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Comp_Address" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Comp_City" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Comp_Index" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Comp_Tel" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="Comp_Fax" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="Comp_Cont_Address" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Comp_Cont_city" Type="System.String" DbType="NVarChar(75)" CanBeNull="true" />
+      <Column Name="Comp_Cont_index" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Comp_Cont_tel" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="Comp_Cont_fax" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="Comp_URL" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Comp_Mail" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="CONTACT_NAME" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Comp_Chief" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Chief_Position" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="SENT" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="gave" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="HAS_NO_FREQ" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="REC_Form1" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Received" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="remark" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Association Name="fls_COMPANY_INFO_fls_LICENCE_INFO" Member="fls_LICENCE_INFOs" ThisKey="id" OtherKey="comp_id" Type="fls_LICENCE_INFO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.fls_LICENCE_INFO" Member="fls_LICENCE_INFOs">
+    <Type Name="fls_LICENCE_INFO">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LICENCE" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="LIC_ISSU_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="LIC_EXPIRY_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="COMMENTS" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="comp_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="fls_LICENCE_INFO_Fams_Freq" Member="Fams_Freqs" ThisKey="id" OtherKey="licence_id" Type="Fams_Freq" />
+      <Association Name="fls_COMPANY_INFO_fls_LICENCE_INFO" Member="fls_COMPANY_INFO" ThisKey="comp_id" OtherKey="id" Type="fls_COMPANY_INFO" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Fams_Freq" Member="Fams_Freqs">
+    <Type Name="Fams_Freq">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="freq" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="BandWidth" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="zone_city_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="remark" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="reestrit" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="licence_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="fls_LICENCE_INFO_Fams_Freq" Member="fls_LICENCE_INFO" ThisKey="licence_id" OtherKey="id" Type="fls_LICENCE_INFO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.COMBO_Portable" Member="COMBO_Portables">
+    <Type Name="COMBO_Portable">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Manufacturer" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Model" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PowerVHF" Type="System.Decimal" DbType="Decimal(5,1)" CanBeNull="true" />
+      <Column Name="PowerUHF" Type="System.Decimal" DbType="Decimal(5,1)" CanBeNull="true" />
+      <Column Name="Image" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+</Database>

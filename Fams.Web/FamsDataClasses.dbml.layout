@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 13" name="FamsDataClasses">
+  <DataContextMoniker Name="/FamsDataClassesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="452aedf0-ba9f-4eb9-8e68-3eac61f07b00" absoluteBounds="0.75, 1.125, 2, 5.6169254557291666">
+      <DataClassMoniker Name="/FamsDataClassesDataContext/fls_COMPANY_INFO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="70077375-5aff-482f-9090-4323a3754f43" absoluteBounds="0.765, 1.585, 1.9700000000000002, 5.0569254557291661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1898759c-5b2a-4032-b5d4-fc2f26bc90f7" absoluteBounds="0.75, 7.625, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/FamsDataClassesDataContext/fls_LICENCE_INFO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fc9376af-4190-42d8-88df-8ef1266c4115" absoluteBounds="0.76500000000000057, 8.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.75 : 6.74192545572917); (1.75 : 7.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/FamsDataClassesDataContext/fls_COMPANY_INFO/fls_COMPANY_INFO_fls_LICENCE_INFO" />
+      <nodes>
+        <classShapeMoniker Id="452aedf0-ba9f-4eb9-8e68-3eac61f07b00" />
+        <classShapeMoniker Id="1898759c-5b2a-4032-b5d4-fc2f26bc90f7" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="2d6d7323-519b-4d12-a503-29e71dff7f5a" absoluteBounds="0.625, 10.625, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/FamsDataClassesDataContext/Fams_Freq" />
+      <nestedChildShapes>
+        <elementListCompartment Id="de9e73b2-93c8-402b-aeca-ad0ef33a683d" absoluteBounds="0.63999999999999968, 11.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.6875 : 9.5881982421875); (1.6875 : 10.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/FamsDataClassesDataContext/fls_LICENCE_INFO/fls_LICENCE_INFO_Fams_Freq" />
+      <nodes>
+        <classShapeMoniker Id="1898759c-5b2a-4032-b5d4-fc2f26bc90f7" />
+        <classShapeMoniker Id="2d6d7323-519b-4d12-a503-29e71dff7f5a" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="e7086af5-f6bd-4cbf-ba97-120e13003262" absoluteBounds="4.125, 1.125, 2, 1.9631982421875">
+      <DataClassMoniker Name="/FamsDataClassesDataContext/COMBO_Portable" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5a8355fa-5cfd-4b76-99ff-1998f878a9ec" absoluteBounds="4.14, 1.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
